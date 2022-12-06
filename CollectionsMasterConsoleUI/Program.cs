@@ -83,9 +83,29 @@ namespace CollectionsMasterConsoleUI
             //TODO: Create a method that prints if a user number is present in the list
             //Remember: What if the user types "abc" accident your app should handle that!
             Console.WriteLine("What number will you search for in the number list?");
+            string userNumber; 
+            bool valid;
+            int result;
+            do
+            {
+                userNumber = Console.ReadLine();
+                valid = int.TryParse(userNumber, out result);
+                
+                if (valid)
+                { 
+                    NumberChecker(numbersList, result);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry, try again");
+                    
+                }
+            } while (!valid);
+            
+           /* Console.WriteLine("What number will you search for in the number list?");
             var userNumber = Console.ReadLine();
             bool valid = int.TryParse(userNumber, out int result);
-            
+
             if (valid)
             {
                 NumberChecker(numbersList, result);
@@ -94,9 +114,10 @@ namespace CollectionsMasterConsoleUI
             {
                 Console.WriteLine("Invalid entry");
             }
-            
-            NumberChecker(numbersList, result);
-            
+           */
+
+            //NumberChecker(numbersList, result);
+
             Console.WriteLine("-------------------");
 
             Console.WriteLine("All Numbers:");
@@ -154,18 +175,29 @@ namespace CollectionsMasterConsoleUI
 
         private static void NumberChecker(List<int> numberList, int searchNumber)
         {
-           
+            bool test = false;
                 foreach (var item in numberList)
                 {
                     if (searchNumber == item)
                     {
                         Console.WriteLine($"{searchNumber} is in the List");
+                        test = true;
                         break;
                     }
-                    
+                
+                }
+                if (!test)
+                {
+                    Console.WriteLine($"{searchNumber} is not in the list");
                 }
                 
-            
+           
+
+
+
+
+
+
         }
 
         private static void Populater(List<int> numberList)
